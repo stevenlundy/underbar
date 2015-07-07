@@ -216,7 +216,7 @@
       } else {
         return !item;
       }
-    })
+    });
   };
 
 
@@ -242,7 +242,7 @@
     for(var i = 1; i < arguments.length; i++){
       _.each(arguments[i], function(item, prop){
         obj[prop] = item;
-      })
+      });
     }
     return obj;
   };
@@ -250,6 +250,14 @@
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
   _.defaults = function(obj) {
+    for(var i = 1; i < arguments.length; i++){
+      _.each(arguments[i], function(item, prop){
+        if (!(prop in obj)){
+          obj[prop] = item;
+        }
+      });
+    }
+    return obj;
   };
 
 
