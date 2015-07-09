@@ -435,6 +435,15 @@
   // Take the difference between one array and a number of other arrays.
   // Only the elements present in just the first array will remain.
   _.difference = function(array) {
+    var args = _.map(arguments, function(item){
+      return item;
+    });
+    args.splice(0,1);
+    return _.filter(arguments[0], function(item){
+      return _.every(args, function(array){
+        return !_.contains(array,item);
+      });
+    });
   };
 
   // Returns a function, that, when invoked, will only be triggered at most once
