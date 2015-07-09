@@ -394,6 +394,21 @@
   // Example:
   // _.zip(['a','b','c','d'], [1,2,3]) returns [['a',1], ['b',2], ['c',3], ['d',undefined]]
   _.zip = function() {
+    var args = arguments;
+    var zipped = [];
+    zipped.length = _.reduce(arguments, function(maxLength, item){
+      if(item.length > maxLength){
+        return item.length;
+      } else {
+        return maxLength;
+      }
+    },0);
+    _.each(zipped, function(item, i){
+      zipped[i] = _.reduce(args, function(row, item){
+        return row.concat(item[i]);
+      },[])
+    })
+    return zipped;
   };
 
   // Takes a multidimensional array and converts it to a one-dimensional array.
