@@ -321,6 +321,18 @@
   // parameter. For example _.delay(someFunction, 500, 'a', 'b') will
   // call someFunction('a', 'b') after 500ms
   _.delay = function(func, wait) {
+    // Turn arguments array into an array with map
+    var args = _.map(arguments, function(item){
+      return item;
+    });
+    // Take off the first two arguments that contain the func and wait
+    args.splice(0,2);
+
+    var delayed = function(){
+      func.apply(this, args);
+    };
+    
+    setTimeout(delayed, wait);
   };
 
 
