@@ -301,6 +301,17 @@
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
+    var preComputed = {};
+    return function(){
+       // Turn arguments object into an array with map, then join it into a string
+      var args = _.map(arguments,function(item){
+        return item;
+      }).join(",");
+      if(!(args in preComputed)){
+        preComputed[args] = func.apply(this, arguments);
+      }
+      return preComputed[args];
+    }
   };
 
   // Delays a function for the given number of milliseconds, and then calls
