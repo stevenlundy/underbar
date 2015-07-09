@@ -406,6 +406,15 @@
   // Takes an arbitrary number of arrays and produces an array that contains
   // every item shared between all the passed-in arrays.
   _.intersection = function() {
+    // Turn arguments array into an array with map
+    var args = _.map(arguments, function(item){
+      return item;
+    });
+    return _.filter(args[0], function(item){
+      return _.every(args, function(array){
+        return _.contains(array,item);
+      });
+    });
   };
 
   // Take the difference between one array and a number of other arrays.
