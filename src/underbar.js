@@ -331,7 +331,7 @@
     var delayed = function(){
       func.apply(this, args);
     };
-    
+
     setTimeout(delayed, wait);
   };
 
@@ -347,6 +347,15 @@
   // input array. For a tip on how to make a copy of an array, see:
   // http://mdn.io/Array.prototype.slice
   _.shuffle = function(array) {
+    var source = array.slice();
+    var shuffled = [];
+
+    while(source.length){
+      var index = Math.floor(Math.random()*source.length);
+      shuffled.push(source.splice(index, 1)[0]);
+    }
+
+    return shuffled;
   };
 
 
