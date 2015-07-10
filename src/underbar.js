@@ -478,5 +478,16 @@
   //
   // Note: This is difficult! It may take a while to implement.
   _.throttle = function(func, wait) {
+    var canCall = true;
+    var reset = function(){
+      canCall = true;
+    };
+    return function(){
+      if(canCall){
+        func.apply(this, arguments);
+        canCall = false;
+        setTimeout(reset, wait);
+      }
+    }
   };
 }());
